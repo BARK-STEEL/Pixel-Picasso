@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html ng-app="PixlArt">
+  <head>
+    <meta charset="utf-8">
+    <title>PixlArt</title>
+    <link rel="stylesheet" href="/css/spectrum.css">
+    <link rel="stylesheet" href="/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.5/angular.js" charset="utf-8"></script>
+    <script src="/js/spectrum.js" charset="utf-8"></script>
+    <script src="/js/app.js" charset="utf-8"></script>
+  </head>
+  <body>
+    <section ng-controller="PaintingsController">
+      <div id="title">Pixel Picasso</div>
+      <div class="controls">
+        <div class="setColor buttons" ng-show="!pixelDiv" data-color="none">
+          <input type='text' id="custom"  />
+        </div>
+        <div id="eraserDiv" ng-show="!pixelDiv" class="buttons">
+          <button type="button" ng-click="defaultPixel()" id="eraserButton"><img  id="eraser" src="/images/Editing-Eraser-icon.png" alt=""></button>
+        </div>
+        <div id="toggleDiv" ng-show="!pixelDiv" class="buttons">
+          <button type="button" ng-click="toggleCanvas()" id="toggleButton">Toggle Canvas</button>
+        </div>
+        <div id="resetDiv" ng-show="!pixelDiv" class="buttons">
+          <button type="button" ng-click="resetCanvas()" id="resetButton">Reset Canvas</button>
+        </div>
+        <div class="selection">
+          <div class='choices' ng-show="pixelDiv" id="pixelDiv">
+            <h2>Choose a pixel size</h2>
+            <select id="pixelChoice">
+              <!-- <option value="5">5</option>
+              <option value="7">7</option>
+              <option value="10">10</option>
+              <option value="15">15</option> -->
+              <option value="30">30</option>
+              <option value="50">50</option>
+              <option value="75">75</option>
+            </select>
+            <!-- <button id="pixelButton" ng-click="showInput()" type="button" name="button">Submit</button> -->
+          </div>
+          <div id="underPaintingDiv" ng-show="pixelDiv">
+            <input type="text" id="underPaintingChoice" placeholder="...Painting url">
+            <button id="underPaintingButton" ng-click="renderCanvas()" type="button" name="button">Submit</button>
+          </div>
+        </div>
+      </div>
+      <div id="two-paintings" ng-show="!pixelDiv">
+        <div id="underPainting" ng-show="togglePainting"><img id="underPaintingImage" src="" alt="">
+        </div>
+        <section id="canvas" ng-show="!pixelDiv"  width="1300" height="650">
+          <div ng-repeat="pixel in pixels track by $index" class="square" style="width: {{pixelSize || findPixelSize(pixels.length)}}px; height: {{pixelSize || findPixelSize(pixels.length)}}px; background: #{{pixel}}" ng-mousedown="setListeners($event)" ng-mouseup="unsetListeners()" ng-mouseenter="brushPreviewOn($event)">
+          </div>
+        </section>
+      </div>
+      <div id="saveButton">
+        <button  type="button" ng-show="!pixelDiv" ng-click="createPainting()">Save Painting</button>
+      </div>
+      <section id="paintings">
+        <h2 id="gallery">Gallery</h2>
+        <ul>
+          <li ng-repeat="painting in paintings" class="newCanvas" style="background-color: #E7E5DB; display: inline-block; width: 260px; height: 130px; margin: 2% 2% 0 0 ; border-image: url('/images/newFrame.png') 100 round ; border-image-width: 20px; border-image-outset: 13px; box-shadow: 9px 9px 20px black
+          ;" ng-click="showCanvas(painting.colors.split('#'))">
+            <div ng-repeat="newPixel in painting.colors.split('#') track by $index" style="background-color: #{{newPixel}}; width: {{findPixelSize(painting.colors.split('#').length)/5}}px; height: {{findPixelSize(painting.colors.split('#').length)/5}}px; float:left; margin: 0px" class="newSquare">
+            </div>
+            <button type="button" style="margin-top:10%;" ng-click="removePainting($index)">Remove</button>
+          </li>
+        </ul>
+      </section>
+    </section>
+  </body>
+</html>

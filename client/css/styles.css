@@ -1,0 +1,181 @@
+body {
+  background: url(https://cms-assets.tutsplus.com/legacy-premium-tutorials/posts/13764/images/13764_38a9e1afcc5a9ca2ccca744429df83c9.jpg) no-repeat;
+  /*background: 0 -100px repeat-x url(https://mdn.mozillademos.org/files/5415/bg_gallery.png) #4F191A;*/
+
+  /*background-image: url('http://www.bmw.com/_common/shared/newvehicles/x/x4/2014/showroom/09_gallery/background.jpg');*/
+  background-size: cover;
+  font-family: 'ChiTown';
+  font-size: 2em;
+  color: rgb(207, 174, 74);
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+@font-face {
+  font-family: 'Gallery';
+  src: url("../fonts/X_GALLE.TTF");
+}
+@font-face {
+  font-family: 'Coventry';
+  src: url("../fonts/CoventryGardenNF.ttf");
+}
+@font-face {
+  font-family: 'Nickelodeon';
+  src: url("../fonts/NickelodeonNF.ttf");
+}
+@font-face {
+  font-family: 'ChiTown';
+  src: url("../fonts/Chi-TownNF.ttf");
+}
+select {
+  border: 0; font-family: cursive;
+  font-size: 16px;
+}
+.brush-color {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  margin: 15px auto;
+}
+.square {
+  float: left;
+  width: 7px;
+  height: 7px;
+  /*background: #E7E5DB;*/
+  margin: 0px;
+}
+.choices {
+  display: inline-block;
+  margin-left: 2%;
+}
+.buttons {
+  display: inline-block;
+}
+#title {
+  position: absolute;
+  left:2%;
+  top: 1%;
+  font-size: 1.5em;
+  text-decoration: underline;
+}
+#gallery {
+  text-decoration: underline;
+}
+
+#resetDiv {
+  position: absolute;
+  right:2%;
+  top: 1%;
+}
+#toggleDiv {
+  position: absolute;
+  right:13%;
+  top: 1%;
+}
+#eraser {
+  height: 25px;
+  width: 25px;
+}
+#eraserButton {
+  padding: 1%;
+  border-radius: 25%;
+}
+#saveButton {
+  text-align: center;
+}
+#eraserDiv {
+  width:100px;
+  position: absolute;
+  top:10px;
+  margin-left:20px;;
+}
+.setColor {
+  margin-bottom: 1%;
+  width:100px;
+}
+#two-paintings {
+  position: relative;
+  width: 1300px;
+  height: 650px;
+  margin: 2% auto;
+}
+#canvas {
+  position:relative;
+  top: 0;
+  left: 0;
+  width: 1300px;
+  height: 650px;
+  /*margin: 2% auto;*/
+  background-color: #E7E5DB;
+  border-image: url('/images/newFrame.png') 100 round ;
+  border-image-width: 40px;
+  border-image-outset:27px;
+  box-shadow: 19px 20px 20px black;
+  opacity: 0.5;
+}
+#underPainting {
+  position: absolute;
+  width: 1300px;
+  height: 650px;
+  /*margin: 2% auto;*/
+  /*background: url(http://www.freeposters.biz/wp-content/uploads/2014/07/1405035789.8.jpg) no-repeat;*/
+  background-size: contain;
+}
+#underPaintingImage {
+  height: 650px;
+  display: block;
+  margin: 0 auto;
+}
+
+#paintings {
+  text-align: center;
+}
+
+h1 {
+  font-family: Helvetica;
+  font-size: 48px;
+  text-align: center;
+}
+
+input[type="text"] {
+  padding: 1em;
+  width: 35%;
+  margin-bottom: 15px;
+  margin-right: 1%;
+  border: 1px solid lightgray;
+}
+
+button {
+  background: #7d6a34;
+  background-image: -webkit-linear-gradient(top, #7d6a34, rgb(207, 174, 74));
+  background-image: -moz-linear-gradient(top, #7d6a34, rgb(207, 174, 74));
+  background-image: -ms-linear-gradient(top, #7d6a34, rgb(207, 174, 74));
+  background-image: -o-linear-gradient(top, #7d6a34, rgb(207, 174, 74));
+  background-image: linear-gradient(to bottom, #7d6a34, rgb(207, 174, 74));
+  -webkit-border-radius: 12;
+  -moz-border-radius: 12;
+  border-radius: 12px;
+  font-family: Arial;
+  color: #d7d7db;
+  font-size: 15px;
+  padding: 5px 10px 5px 10px;
+  text-decoration: none;
+}
+
+button:hover {
+  cursor: pointer;
+  background: rgb(207, 174, 74);
+  background-image: -webkit-linear-gradient(top, rgb(207, 174, 74), #7d6a34);
+  background-image: -moz-linear-gradient(top, rgb(207, 174, 74), #7d6a34);
+  background-image: -ms-linear-gradient(top, rgb(207, 174, 74), #7d6a34);
+  background-image: -o-linear-gradient(top, rgb(207, 174, 74), #7d6a34);
+  background-image: linear-gradient(to bottom, rgb(207, 174, 74), #7d6a34);
+  text-decoration: none;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+#eraser, #eraserButton {
+  background-color: white;
+  background-image: none;
+}
+
+.controls {
+  text-align: center;
+}
