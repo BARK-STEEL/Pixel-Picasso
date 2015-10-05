@@ -30,7 +30,16 @@ angular.module('PixlArt')
 
     };
 
+    $scope.findPixel = function(pixel){
+      if (pixel.length===6){
+        return pixel;
+      } else {
+        return "E7E5DB";
+      }
+    };
+
     $scope.renderCanvas = function(){
+      $scope.pixels = [];
       $scope.pixelDiv = false;
       $scope.togglePainting = true;
       // $('#underPainting').css({background: 'url(' + $('#underPaintingChoice').val() +') no-repeat', backgroundSize: '100% 100%'});
@@ -45,13 +54,13 @@ angular.module('PixlArt')
     };
 
     $scope.showCanvas = function(canvasPixels) {
-      console.log('click');
+      $scope.pixels = [];
       $scope.pixelDiv = false;
       $scope.togglePainting = false;
+      $('#canvas').css('opacity', '1');
       for (var i=0; i < canvasPixels.length; i++){
         $scope.pixels.push(canvasPixels[i]);
       }
-      console.log($scope.pixels);
     };
 
     $scope.findPixelSize = function(numPixels){

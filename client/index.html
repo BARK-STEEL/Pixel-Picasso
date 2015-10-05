@@ -50,7 +50,7 @@
         <div id="underPainting" ng-show="togglePainting"><img id="underPaintingImage" src="" alt="">
         </div>
         <section id="canvas" ng-show="!pixelDiv"  width="1300" height="650">
-          <div ng-repeat="pixel in pixels track by $index" class="square" style="width: {{pixelSize || findPixelSize(pixels.length)}}px; height: {{pixelSize || findPixelSize(pixels.length)}}px; background: #{{pixel}}" ng-mousedown="setListeners($event)" ng-mouseup="unsetListeners()" ng-mouseenter="brushPreviewOn($event)">
+          <div ng-repeat="pixel in pixels track by $index" class="square" style="width: {{findPixelSize(pixels.length)}}px; height: {{findPixelSize(pixels.length)}}px; background: #{{findPixel(pixel)}}" ng-mousedown="setListeners($event)" ng-mouseup="unsetListeners()" ng-mouseenter="brushPreviewOn($event)">
           </div>
         </section>
       </div>
