@@ -1,0 +1,6 @@
+<li ng-repeat="painting in paintings" class="newCanvas" style="background-color: #E7E5DB; display: inline-block; width: 260px; height: 130px; margin: 2% 2% 0 0 ; border-image: url('/images/newFrame.png') 100 round ; border-image-width: 20px; border-image-outset: 13px; box-shadow: 9px 9px 20px black
+;">
+  <div ng-click="showCanvas(painting.colors.split('#'))" ng-repeat="newPixel in painting.colors.split('#') track by $index" style="background-color: #{{newPixel}}; width: {{findPixelSize(painting.colors.split('#').length)/5}}px; height: {{findPixelSize(painting.colors.split('#').length)/5}}px; float:left; margin: 0px" class="newSquare">
+  </div>
+  <button type="button" style="margin-top:10%;" ng-click="removePainting($index)">Remove</button>
+</li>

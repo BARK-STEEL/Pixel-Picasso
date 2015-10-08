@@ -18,8 +18,11 @@
   },
   "homepage": "https://github.com/skipteel/MEAN#readme",
   "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
-    "mongoose": "^4.1.9"
+    "mongoose": "^4.1.9",
+    "morgan": "^1.6.1",
+    "rand-token": "^0.2.1"
   }
 }
