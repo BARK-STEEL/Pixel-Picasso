@@ -27,6 +27,6 @@ var PaintingsController = require('./server/controllers/paintings');
 app.use('/api/paintings', PaintingsController);
 
 var port = process.env.PORT || '8080';
-app.listen('8080', function(){
+app.listen(port, function(){
   console.log('...listening');
 });
