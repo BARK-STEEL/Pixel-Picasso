@@ -6,6 +6,7 @@ angular.module('PixlArt')
   .controller('UsersController', ['$scope', '$rootScope', '$http', '$cookies', function($scope, $rootScope, $http, $cookies){
     $scope.signUp = false;
     $scope.logIn = true;
+    $scope.welcome = true;
     $rootScope.user = {};
     $scope.newUser = {};
     $scope.logInUser = {};
@@ -43,6 +44,7 @@ angular.module('PixlArt')
         console.log($rootScope.pixelDiv);
         $scope.logInUser = {};
         $scope.logIn = false;
+        $scope.welcome = false;
       });
     };
 
@@ -53,6 +55,7 @@ angular.module('PixlArt')
       $rootScope.controls = false;
       $rootScope.pixelDiv = false;
       $scope.logIn = true;
+      $scope.welcome = true;
       $rootScope.gallery = false;
       $rootScope.toggleGalleryButton = false;
     };
@@ -113,6 +116,7 @@ angular.module('PixlArt')
 
     $scope.showCanvas = function(canvasPixels, url) {
       $scope.pixels = [];
+      $rootScope.gallery = false;
       $rootScope.pixelDiv = false;
       $rootScope.controls = true;
       $scope.togglePainting = false;

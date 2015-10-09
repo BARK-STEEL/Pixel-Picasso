@@ -21,8 +21,12 @@ h6 {
   margin: 0;
   margin-top:3%;
 }
+#welcome {
+  text-align: center;
+  margin-top:10%;
+}
 .log-in, .sign-up {
-  margin-top: 20%;
+  margin-top: 10%;
   text-align: center;
 }
 @font-face {
@@ -53,7 +57,7 @@ select {
 }
 .newCanvas {
   display: inline-block;
-  margin: 0 2%;
+  margin: 0 2% 2% 2%;
 }
 .square {
   float: left;
@@ -85,7 +89,17 @@ select {
   left:28%;
   top: 2%;
 }
-
+#closeGalleryDiv {
+  position: absolute;
+  left:28%;
+  top: 2%;
+}
+h2, h3 {
+  margin:0;
+}
+#pixelDiv {
+  margin-bottom: 4%;
+}
 #newPaintingDiv {
   position: absolute;
   right:20.4%;
@@ -142,6 +156,15 @@ select {
   border-image-outset:27px;
   box-shadow: 19px 20px 20px black;
   opacity: 0.5;
+  margin-bottom: 2%;
+}
+.selection {
+  width:80%;
+  margin: 15% auto 0 auto;
+  text-align: center;
+}
+#underPaintingChoice {
+  width: 75%;
 }
 #underPainting {
   position: absolute;
@@ -157,8 +180,12 @@ select {
   margin: 0 auto;
 }
 
-#paintings {
+#gallery {
   text-align: center;
+}
+
+#paintingsGallery{
+  margin-top: 5%;
 }
 
 h1 {
@@ -167,9 +194,9 @@ h1 {
   text-align: center;
 }
 
-input[type="text"] {
+input[type="text"], input[type="password"] {
   padding: 1em;
-  width: 35%;
+  width: 20%;
   margin-bottom: 15px;
   margin-right: 1%;
   border: 1px solid lightgray;
