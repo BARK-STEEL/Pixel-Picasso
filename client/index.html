@@ -65,6 +65,10 @@
         <div id="resetDiv" ng-show="controls" class="buttons">
           <button type="button" ng-click="resetCanvas()" id="resetButton">Reset Canvas</button>
         </div>
+        <div id="saveButton">
+          <input type="text" id="titleText" ng-model="newPainting.paintingTitle" ng-show="controls">
+          <button  type="button" ng-show="controls" ng-click="createPainting()">Save Painting</button>
+        </div>
       <!-- </div> -->
       <div class="selection" ng-show="pixelDiv">
         <div class='choices' id="pixelDiv">
@@ -95,10 +99,6 @@
             <div ng-repeat="pixel in pixels track by $index" class="square" style="width: {{findPixelSize(pixels.length)}}px; height: {{findPixelSize(pixels.length)}}px; background: #{{findPixel(pixel)}}" ng-mousedown="setListeners($event)" ng-mouseup="unsetListeners()" ng-mouseenter="brushPreviewOn($event)">
             </div>
           </section>
-          <div id="saveButton">
-            <input type="text" id="titleText" ng-model="newPainting.paintingTitle" ng-show="controls">
-            <button  type="button" ng-show="controls" ng-click="createPainting()">Save Painting</button>
-          </div>
         </div>
       <!-- </div> -->
 
