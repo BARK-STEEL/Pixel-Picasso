@@ -102,25 +102,28 @@
         </div>
       <!-- </div> -->
 
-      <section id="gallery"  ng-show="gallery">
-        <div id="galleryInner" style="width:10000px;">
-          <!-- <div id="closeGalleryDiv" class="buttons">
-            <button type="button"  ng-click="toggleGallery()" id="closeGallery">Close Gallery</button>
-          </div> -->
-            <!-- <h2 id="paintingsGallery">Gallery</h2>
-          <h4>Click on a painting to view and edit in the main canvas.</h4> -->
-          <ul>
-            <li ng-repeat="painting in paintings" class="newCanvas">
-              <div  style="background-color: #E7E5DB; display: inline-block; width: 260px; height: 130px; margin: 2% 2% 0 0 ; border-image: url('/images/newFrame.png') 100 round ; border-image-width: 20px; border-image-outset: 13px; box-shadow: 9px 9px 20px black
-              ;">
-                <img style="width: 260px; height: 130px;" src="{{painting.img}}" alt="" ng-click="showCanvas(painting.colors.split('#'), painting.url)">
+      <div id="modal" ng-show="gallery">
+        <span id="close-modal" ng-click="toggleGallery()">X</span>
+        <section id="gallery">
+          <div id="galleryInner">
+            <!-- <div id="closeGalleryDiv" class="buttons">
+              <button type="button"  ng-click="toggleGallery()" id="closeGallery">Close Gallery</button>
+            </div> -->
+              <!-- <h2 id="paintingsGallery">Gallery</h2>
+            <h4>Click on a painting to view and edit in the main canvas.</h4> -->
+            <!-- <ul> -->
+              <div ng-repeat="painting in paintings" class="newCanvas">
+                <div  style="background-color: #E7E5DB; display: inline-block; width: 260px; height: 130px; margin: 2% 2% 0 0 ; border-image: url('/images/newFrame.png') 100 round ; border-image-width: 20px; border-image-outset: 13px; box-shadow: 9px 9px 20px black
+                ;">
+                  <img style="width: 260px; height: 130px;" src="{{painting.img}}" alt="" ng-click="showCanvas(painting.colors.split('#'), painting.url)">
+                </div>
+                <h6>{{painting.title}}</h6>
+                <button type="button" style="margin-top:2%;" ng-click="removePainting($index)">Remove</button>
               </div>
-              <h6>{{painting.title}}</h6>
-              <button type="button" style="margin-top:2%;" ng-click="removePainting($index)">Remove</button>
-            </li>
-          </ul>
-        </div>
-      </section>
+            <!-- </ul> -->
+          </div>
+        </section>
+      </div>
     </section>
   </body>
 </html>
