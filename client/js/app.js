@@ -79,13 +79,9 @@ angular.module('PixlArt')
 
     $scope.click = false;
 
-    // $http.get('/api/paintings').then(function(response){
-    //   $scope.paintings = response.data;
-    // });
+    var trace = 1;
 
-    // $scope.showInput = function(){
-    //
-    // };
+    $scope.trace = "both";
 
     $scope.findPixel = function(pixel){
       if (pixel.length===6){
@@ -121,6 +117,7 @@ angular.module('PixlArt')
       $rootScope.controls = true;
       $scope.togglePainting = false;
       $('#canvas').css('opacity', '1');
+      trace = 2;
       $('#underPaintingImage').attr('src', url );
       for (var i=0; i < canvasPixels.length; i++){
         $scope.pixels.push(canvasPixels[i]);
@@ -200,12 +197,23 @@ angular.module('PixlArt')
     };
 
     $scope.toggleCanvas = function(){
-      $scope.togglePainting = !$scope.togglePainting;
-      if ($scope.togglePainting===false){
-        $('#canvas').css('opacity', '1');
-      } else {
-        $('#canvas').css('opacity', '0.5');
+      trace += 1;
+      if (trace == 4){
+        trace = 1;
       }
+      if (trace == 1){
+        $('#canvas').css('opacity', '0.5');
+      } else if (trace == 2){
+        $('#canvas').css('opacity', '1');
+      } else if (trace == 3){
+        $('#canvas').css('opacity', '0');
+      }
+    //   $scope.togglePainting = !$scope.togglePainting;
+    //   if ($scope.togglePainting===false){
+    //     $('#canvas').css('opacity', '1');
+    //   } else {
+    //     $('#canvas').css('opacity', '0.5');
+    //   }
     };
 
     $scope.toggleGallery = function(){

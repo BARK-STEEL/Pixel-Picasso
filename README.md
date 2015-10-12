@@ -20,13 +20,19 @@
 
 ---
 
-- Painters can choose te size of the pixels in their paintings
+- Painters can choose the size of the pixels in their paintings
 
 ---
 
 <div style="text-align:center;">
 <img src="client/images/PixelPearl.png" width="100%">
 </div>
+
+---
+
+##url
+
+http://still-river-6681.herokuapp.com/
 
 ---
 
