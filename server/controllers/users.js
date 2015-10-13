@@ -20,16 +20,20 @@ usersRouter.post('/authentication_token', function(req, res){
   var username = req.body.username;
   var password = req.body.password;
   User.findOne({username: username}, function(err, user){
-    user.authenticate(password, function(isMatch){
-      if(isMatch){
-        user.generateToken();
-        user.save(function(){
-          res.json(user);
-        });
-      } else {
-        res.json({status: 401, message: 'Access denied'});
-      }
-    });
+    if (user === null) {
+      res.json({status: 401, message: 'Access denied'});
+    } else {
+      user.authenticate(password, function(isMatch){
+        if(isMatch){
+          user.generateToken();
+          user.save(function(){
+            res.json(user);
+          });
+        } else {
+          res.json({status: 401, message: 'Access denied'});
+        }
+      });
+    }
   });
 });
 

@@ -35,6 +35,7 @@
           <button type="submit">Submit</button>
         </form>
         <button ng-click="signUp = true; logIn = false">Need to sign up? Click here!</button>
+        <h4 id="errorDiv" ng-show="error">Invalid username and/or password</h4>
       </div>
 
       <div class="log-out" ng-show="user._id">
@@ -57,7 +58,7 @@
           <button type="button"  ng-click="toggleGallery()" id="toggleGallery">Gallery</button>
         </div>
         <div id="newPaintingDiv" ng-show="controls" class="buttons">
-          <button type="button" ng-click="newPainting()" id="new-painting">New</button>
+          <button type="button" ng-click="newPaintingScreen()" id="new-painting">New</button>
         </div>
         <div id="toggleDiv" ng-show="controls" class="buttons">
           <button type="button" ng-click="toggleCanvas()" id="toggleButton">Toggle Canvas</button>
@@ -93,7 +94,7 @@
 
       <!-- <div ng-show="!gallery"> -->
         <div id="two-paintings" ng-show="controls">
-          <div id="underPainting"><img id="underPaintingImage" src="" alt="">
+          <div ng-show="newPainting.url.length>0" id="underPainting"><img id="underPaintingImage" src="{{newPainting.url}}" alt="">
           </div>
           <section id="canvas" width="1300" height="650">
             <div ng-repeat="pixel in pixels track by $index" class="square" style="width: {{findPixelSize(pixels.length)}}px; height: {{findPixelSize(pixels.length)}}px; background: #{{findPixel(pixel)}}" ng-mousedown="setListeners($event)" ng-mouseup="unsetListeners()" ng-mouseenter="brushPreviewOn($event)">
@@ -115,7 +116,7 @@
               <div ng-repeat="painting in paintings" class="newCanvas">
                 <div  style="background-color: #E7E5DB; display: inline-block; width: 260px; height: 130px; margin: 2% 2% 0 0 ; border-image: url('/images/newFrame.png') 100 round ; border-image-width: 20px; border-image-outset: 13px; box-shadow: 9px 9px 20px black
                 ;">
-                  <img style="width: 260px; height: 130px;" src="{{painting.img}}" alt="" ng-click="showCanvas(painting.colors.split('#'), painting.url)">
+                  <img style="width: 260px; height: 130px;" src="{{painting.img}}" alt="" ng-click="showCanvas(painting.colors.split('#'), painting.url, painting.title)">
                 </div>
                 <h6>{{painting.title}}</h6>
                 <button type="button" style="margin-top:2%;" ng-click="removePainting($index)">Remove</button>

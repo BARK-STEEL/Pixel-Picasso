@@ -14,13 +14,7 @@ angular.module('PixlArt')
     $rootScope.pixelDiv = false;
     $rootScope.gallery = false;
     $rootScope.toggleGalleryButton = false;
-
-    // $scope.getUser = function(id){
-    //   $http.get('/api/users' + id).then(function(response){
-    //     $rootScope.user = response.data;
-    //   });
-    // };
-    // $scope.getUser();
+    $scope.error = false;
 
     $scope.createUser = function(){
       $http.post('/api/users',
@@ -34,30 +28,37 @@ angular.module('PixlArt')
     $scope.obtainToken = function(){
       $http.post('/api/users/authentication_token',
       $scope.logInUser).then(function(response){
-        $rootScope.token = response.data.token;
-        $cookies.put('token', $rootScope.token);
-        $rootScope.user = response.data;
-        $rootScope.paintings = $rootScope.user.paintings;
-        console.log($rootScope.paintings);
-        $rootScope.pixelDiv = true;
-        $rootScope.toggleGalleryButton = true;
-        console.log($rootScope.pixelDiv);
-        $scope.logInUser = {};
-        $scope.logIn = false;
-        $scope.welcome = false;
+        if (response.data.status === 401){
+          $scope.error = true;
+        } else {
+          $scope.error = false;
+          $rootScope.token = response.data.token;
+          $cookies.put('token', $rootScope.token);
+          $rootScope.user = response.data;
+          $rootScope.paintings = $rootScope.user.paintings;
+          $rootScope.pixelDiv = true;
+          $rootScope.toggleGalleryButton = true;
+          $scope.logInUser = {};
+          $scope.logIn = false;
+          $scope.welcome = false;
+        }
+
       });
     };
 
     $scope.removeToken = function(){
-      $cookies.remove('token');
-      $rootScope.user = {};
-      $rootScope.paintings = [];
-      $rootScope.controls = false;
-      $rootScope.pixelDiv = false;
-      $scope.logIn = true;
-      $scope.welcome = true;
-      $rootScope.gallery = false;
-      $rootScope.toggleGalleryButton = false;
+      if (confirm('Are you sure you want to log out?')) {
+        $cookies.remove('token');
+        $rootScope.user = {};
+        $rootScope.paintings = [];
+        $rootScope.controls = false;
+        $rootScope.pixelDiv = false;
+        $scope.logIn = true;
+        $scope.welcome = true;
+        $rootScope.gallery = false;
+        $rootScope.toggleGalleryButton = false;
+      }
+
     };
   }])
 
@@ -95,12 +96,13 @@ angular.module('PixlArt')
       if (!$scope.newPainting.url){
         $scope.newPainting.url = '';
       }
+      $scope.newPainting.paintingTitle = "untitled";
       $scope.pixels = [];
       $rootScope.pixelDiv = false;
       $rootScope.controls = true;
       $scope.togglePainting = true;
       // $('#underPainting').css({background: 'url(' + $('#underPaintingChoice').val() +') no-repeat', backgroundSize: '100% 100%'});
-      $('#underPaintingImage').attr('src', $('#underPaintingChoice').val() );
+      // $('#underPaintingImage').attr('src', $('#underPaintingChoice').val() );
       $scope.pixelSize = $('#pixelChoice').val();
       var width = Math.floor(1300 / $scope.pixelSize );
       var height = Math.floor(650 / $scope.pixelSize);
@@ -110,7 +112,7 @@ angular.module('PixlArt')
       }
     };
 
-    $scope.showCanvas = function(canvasPixels, url) {
+    $scope.showCanvas = function(canvasPixels, url, title) {
       $scope.pixels = [];
       $rootScope.gallery = false;
       $rootScope.pixelDiv = false;
@@ -118,10 +120,13 @@ angular.module('PixlArt')
       $scope.togglePainting = false;
       $('#canvas').css('opacity', '1');
       trace = 2;
-      $('#underPaintingImage').attr('src', url );
+      // $('#underPaintingImage').attr('src', url );
       for (var i=0; i < canvasPixels.length; i++){
         $scope.pixels.push(canvasPixels[i]);
       }
+      $scope.newPainting.url = url;
+      $scope.newPainting.paintingTitle = title;
+      console.log($scope.newPainting);
     };
 
     $scope.findPixelSize = function(numPixels){
@@ -148,13 +153,6 @@ angular.module('PixlArt')
       }
       return pixelSize;
     };
-
-    // $scope.renderNewCanvas = function(colors){
-    //   var colorsArray = colors.split("#");
-    //   for (var i = 0; i < colorsArray.length; i++){
-    //
-    //   }
-    // };
 
     $scope.setListeners = function(e){
       $scope.click = true;
@@ -183,17 +181,20 @@ angular.module('PixlArt')
     // };
 
     $scope.resetCanvas = function(){
-      console.log('reset');
-      var pixels = $('.square');
-      for (var i =0; i < pixels.length; i++){
-        $(pixels[i]).css('background-color', '#E7E5DB');
+      if (confirm('Are you sure you want to reset the canvas?')) {
+        var pixels = $('.square');
+        for (var i =0; i < pixels.length; i++){
+          $(pixels[i]).css('background-color', '#E7E5DB');
+        }
       }
     };
 
-    $scope.newPainting = function(){
-      $rootScope.pixelDiv = true;
-      $rootScope.controls = false;
-      $scope.pixels = [];
+    $scope.newPaintingScreen = function(){
+      if (confirm('Are you sure you want to start over?')) {
+        $rootScope.pixelDiv = true;
+        $rootScope.controls = false;
+        $scope.pixels = [];
+      }
     };
 
     $scope.toggleCanvas = function(){
@@ -229,11 +230,14 @@ angular.module('PixlArt')
     }
 
     $scope.createPainting = function(){
+      if ($scope.newPainting.paintingTitle === null){
+        $scope.newPainting.paintingTitle = "untitled";
+      }
+      console.log($scope.newPainting);
       html2canvas($('#canvas'), {
         onrendered: function(canvas) {
           var img = canvas.toDataURL("image/png");
           $scope.newPainting.img = img;
-          console.log($scope.newPainting);
           $('#titleText').html("");
           var paintingString = "";
           var pixels = $('.square');
@@ -261,18 +265,21 @@ angular.module('PixlArt')
     };
 
     $scope.removePainting = function($index){
-      var painting = $scope.paintings[$index];
-      var url = '/api/paintings/';
-      $http({
-        url: url,
-        method: 'put',
-        headers: {
-          token: $rootScope.token
-        },
-        data: {id:painting._id}
-      }).then(function(response){
-        $scope.paintings.splice($index, 1);
-      });
+      if (confirm('Are you sure you want to delete this?')) {
+        var painting = $scope.paintings[$index];
+        var url = '/api/paintings/';
+        $http({
+          url: url,
+          method: 'put',
+          headers: {
+            token: $rootScope.token
+          },
+          data: {id:painting._id}
+        }).then(function(response){
+          $scope.paintings.splice($index, 1);
+        });
+      }
+
     };
 
     $scope.defaultPixel = function(){
