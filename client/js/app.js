@@ -14,14 +14,20 @@ angular.module('PixlArt')
     $rootScope.pixelDiv = false;
     $rootScope.gallery = false;
     $rootScope.toggleGalleryButton = false;
-    $scope.error = false;
+    $scope.logInError = false;
+    $scope.signUpError = false;
 
     $scope.createUser = function(){
       $http.post('/api/users',
       $scope.newUser).then(function(response){
-        $scope.newUser = {};
-        $scope.signUp = false;
-        $scope.logIn = true;
+        if (response.data.status === 401){
+          $scope.signUpError = true;
+        } else {
+          $scope.signUpError = false;
+          $scope.newUser = {};
+          $scope.signUp = false;
+          $scope.logIn = true;
+        }
       });
     };
 
@@ -29,9 +35,9 @@ angular.module('PixlArt')
       $http.post('/api/users/authentication_token',
       $scope.logInUser).then(function(response){
         if (response.data.status === 401){
-          $scope.error = true;
+          $scope.logInError = true;
         } else {
-          $scope.error = false;
+          $scope.logInError = false;
           $rootScope.token = response.data.token;
           $cookies.put('token', $rootScope.token);
           $rootScope.user = response.data;

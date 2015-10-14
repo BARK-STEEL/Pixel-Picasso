@@ -25,6 +25,7 @@
           <button type="submit">Submit</button>
         </form>
         <button ng-click="signUp = false; logIn = true">Already signed up? Click here to log in!</button>
+        <h4 class="errorDiv" ng-show="signUpError">Username already taken</h4>
       </div>
 
       <div class="log-in"  ng-show="logIn">
@@ -35,7 +36,7 @@
           <button type="submit">Submit</button>
         </form>
         <button ng-click="signUp = true; logIn = false">Need to sign up? Click here!</button>
-        <h4 id="errorDiv" ng-show="error">Invalid username and/or password</h4>
+        <h4 class="errorDiv" ng-show="logInError">Invalid username and/or password</h4>
       </div>
 
       <div class="log-out" ng-show="user._id">

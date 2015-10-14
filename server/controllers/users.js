@@ -10,10 +10,21 @@ var express     =     require('express'),
 // });
 
 usersRouter.post('/', function(req, res){
-  var user = new User(req.body);
-  user.save(function(){
-    res.json(user);
+  var username = req.body.username;
+  User.findOne({username: username}, function(err, user){
+    if (user === null) {
+      user = new User(req.body);
+      user.save(function(){
+        res.json(user);
+      });
+    } else {
+      res.json({status: 401, message: 'Username already taken'});
+    }
   });
+  // var user = new User(req.body);
+  // user.save(function(){
+  //   res.json(user);
+  // });
 });
 
 usersRouter.post('/authentication_token', function(req, res){
@@ -28,6 +39,7 @@ usersRouter.post('/authentication_token', function(req, res){
           user.generateToken();
           user.save(function(){
             res.json(user);
+            console.log(user);
           });
         } else {
           res.json({status: 401, message: 'Access denied'});
